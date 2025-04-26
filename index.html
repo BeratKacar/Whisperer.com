@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whisperer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <h1>Whisperer</h1>
+    <div class="menu">
+      <button id="menuBtn">☰</button>
+      <div id="dropdown" class="dropdown hidden">
+        <button id="loginBtn">Log In</button>
+        <button id="signupBtn">Sign Up</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="controls">
+      <h2 class="category-title" id="toggleCategories">
+        <span class="icon">🎞️</span> Kategoriler
+      </h2>
+
+      <div class="category-buttons hidden" id="categoryButtons">
+        <input type="checkbox" id="action" value="action">
+        <label for="action">Aksiyon</label>
+      
+        <input type="checkbox" id="animation" value="animation">
+        <label for="animation">Animasyon</label>
+      
+        <input type="checkbox" id="comedy" value="comedy">
+        <label for="comedy">Komedi</label>
+      
+        <input type="checkbox" id="documentary" value="documentary">
+        <label for="documentary">Belgesel</label>
+      
+        <input type="checkbox" id="drama" value="drama">
+        <label for="drama">Drama</label>
+      
+        <input type="checkbox" id="horror" value="horror">
+        <label for="horror">Korku</label>
+      
+        <input type="checkbox" id="romance" value="romance">
+        <label for="romance">Romantik</label>
+      
+        <input type="checkbox" id="sci-fi" value="sci-fi">
+        <label for="sci-fi">Bilim Kurgu</label>
+      
+        <input type="checkbox" id="thriller" value="thriller">
+        <label for="thriller">Gerilim</label>
+      </div>      
+
+      <button id="refreshBtn">Yenile</button>
+    </section>
+
+    <section id="films" class="film-container"></section>
+    <div id="filmModal" class="modal hidden">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <img id="modalPoster" src="" alt="Film Posteri" />
+        <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
+        <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
+        <p id="modalOverview"></p>
+      </div>
+    </div>
+  </main>   
+
+
+  <script src="script.js"></script>
+</body>
+</html>

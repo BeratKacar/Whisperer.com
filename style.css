@@ -1,0 +1,300 @@
+
+body {
+  background-image: url('assets/Adsız tasarım.png'); /* resmin yolu */
+  background-repeat: no-repeat; /* tekrar etmesin */
+  background-size: cover; /* ekranı kaplasın */
+  background-position: center center; /* ortalansın */
+  background-attachment: fixed; /* kaydırınca sabit kalsın (isteğe bağlı) */
+}
+
+
+nav {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 120px;
+  height: fit-content;
+  margin: 0;
+  color: white;
+}
+
+nav .logo {
+  height: 40px;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.menu {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Kategori bölümü */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.category-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.category-title:hover {
+  transform: scale(1.05);
+  color: #e63946;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.category-buttons.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.category-buttons.hidden {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+
+.category-buttons input[type="checkbox"] {
+  display: none; /* Checkbox'ı gizli tutuyoruz */
+}
+
+.category-buttons label {
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background-color: white;
+  color: #333;
+  opacity: 0;
+  transform: translateY(-20px); /* Kart yukarıda başlasın */
+  animation: drop-in 0.5s forwards;
+  
+  /* Tarot kartı stilinde */
+  width: 120px;
+  height: 200px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #f0e6d6;  /* Kartın rengi */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform-origin: center;
+  pointer-events: auto;  /* Tıklanabilirlik sağlıyoruz */
+}
+
+.category-buttons input[type="checkbox"]:checked + label {
+  background-color: #e63946; /* Seçili olursa renk değiştir */
+  color: white;
+}
+
+@keyframes drop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) rotateX(90deg); /* İlk başta yukarıdan ve dönerek gelsin */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0); /* Bittiğinde düzleşip normal pozisyonda */
+  }
+}
+
+
+.category-buttons label:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.category-buttons label:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.category-buttons label:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.category-buttons label:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.category-buttons label:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.category-buttons label:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.category-buttons label:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.category-buttons label:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.category-buttons label:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+@keyframes drop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) rotateX(90deg); /* İlk başta yukarıdan ve dönerek gelsin */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0); /* Bittiğinde düzleşip normal pozisyonda */
+  }
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #457b9d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1d3557;
+}
+
+/* Filmler */
+.film-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.film {
+  width: 200px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.film img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Hata mesajı */
+.error-message {
+  color: #e63946;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+/* Modal arka plan */
+/* Modal arka plan */
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  padding: 20px; /* Ekran kenarlarına biraz boşluk bırak */
+  overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu gösterilsin */
+}
+
+/* Modal'ın gizlenmesi durumu */
+.modal.hidden {
+  display: none;
+}
+
+/* Modal içeriği */
+.modal-content {
+  background: white;
+  padding: 20px;
+  max-width: 600px; /* Daha geniş ekranlar için genişlik */
+  width: 100%; /* Ekran genişliğine göre uyumlu */
+  max-height: 80%; /* Modal yüksekliğinin %80'ini aşmasın */
+  overflow-y: auto; /* İçerik uzun olursa kaydırma çubuğu gösterilsin */
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Slider olarak kullanılan poster */
+.modal-content .poster-container {
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content .poster-container img {
+  max-width: 100%;
+  max-height: 500px; /* Afişin yüksekliği */
+  object-fit: contain; /* Afişi sıkıştırmadan gösterir */
+  transition: transform 0.3s ease; /* Animasyon ekledik */
+}
+
+/* Kapatma butonu */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+/* Kapatma butonuna hover efekti */
+.close:hover {
+  color: #ff0000;
+}
+
+
