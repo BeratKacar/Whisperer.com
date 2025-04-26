@@ -3,7 +3,7 @@
   margin: 0%;
 }
 body{
-  background-color: #333;
+  background-color: #1D1D1D;
 }
 
 .speech{
@@ -11,7 +11,7 @@ body{
   color: white;
 }
 nav {
-  background-color: #333;
+  background-color: #000000;
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
@@ -148,7 +148,7 @@ nav h1 {
 
 .category-title:hover {
   transform: scale(1.05);
-  color: #e63946;
+  color: #E63946;
 }
 
 .category-buttons {
@@ -196,7 +196,7 @@ nav h1 {
   height: 200px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background: #f0e6d6;  /* Kartın rengi */
+  background: #282828;  /* Kartın rengi */
   display: flex;
   flex-direction: column;
   align-items: center;
