@@ -6,6 +6,7 @@ const categoryButtons = document.getElementById("categoryButtons");
 const API_URL = "https://api.themoviedb.org/3/discover/movie";
 const API_KEY = "70d782d0f4fda375704be7703dbe1753";
 
+
 // Kategori adı -> TMDb genre ID eşleşmesi
 const GENRE_MAP = {
   action: 28,

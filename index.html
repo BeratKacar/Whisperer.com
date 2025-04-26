@@ -6,70 +6,112 @@
   <title>Whisperer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <nav>
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <h1>Whisperer</h1>
-    <div class="menu">
-      <button id="menuBtn">☰</button>
-      <div id="dropdown" class="dropdown hidden">
-        <button id="loginBtn">Log In</button>
-        <button id="signupBtn">Sign Up</button>
+  <header>
+    <nav>
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <h1>Whisperer</h1>
+      <div class="menu">
+        <button id="menuBtn">☰</button>
+        <div id="dropdown" class="dropdown hidden">
+          <button id="loginBtn">Log In</button>
+          <button id="signupBtn">Sign Up</button>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+    </header>
 
-  <main>
-    <section class="controls">
-      <h2 class="category-title" id="toggleCategories">
-        <span class="icon">🎞️</span> Kategoriler
-      </h2>
+    <main>
 
-      <div class="category-buttons hidden" id="categoryButtons">
-        <input type="checkbox" id="action" value="action">
-        <label for="action">Aksiyon</label>
-      
-        <input type="checkbox" id="animation" value="animation">
-        <label for="animation">Animasyon</label>
-      
-        <input type="checkbox" id="comedy" value="comedy">
-        <label for="comedy">Komedi</label>
-      
-        <input type="checkbox" id="documentary" value="documentary">
-        <label for="documentary">Belgesel</label>
-      
-        <input type="checkbox" id="drama" value="drama">
-        <label for="drama">Drama</label>
-      
-        <input type="checkbox" id="horror" value="horror">
-        <label for="horror">Korku</label>
-      
-        <input type="checkbox" id="romance" value="romance">
-        <label for="romance">Romantik</label>
-      
-        <input type="checkbox" id="sci-fi" value="sci-fi">
-        <label for="sci-fi">Bilim Kurgu</label>
-      
-        <input type="checkbox" id="thriller" value="thriller">
-        <label for="thriller">Gerilim</label>
-      </div>      
+      <div id="main-container">
+        <h1 class="speech"> Tell us human, what are you searching for today?</h1>
+      <section class="controls">
+        <h2 class="category-title" id="toggleCategories">
+          <span class="icon">🎞️</span> Kategoriler
+        </h2>
 
-      <button id="refreshBtn">Yenile</button>
-    </section>
+        <div class="category-buttons hidden" id="categoryButtons">
+          <input type="checkbox" id="action" value="action">
+          <label for="action">Aksiyon</label>
+        
+          <input type="checkbox" id="animation" value="animation">
+          <label for="animation">Animasyon</label>
+        
+          <input type="checkbox" id="comedy" value="comedy">
+          <label for="comedy">Komedi</label>
+        
+          <input type="checkbox" id="documentary" value="documentary">
+          <label for="documentary">Belgesel</label>
+        
+          <input type="checkbox" id="drama" value="drama">
+          <label for="drama">Drama</label>
+        
+          <input type="checkbox" id="horror" value="horror">
+          <label for="horror">Korku</label>
+        
+          <input type="checkbox" id="romance" value="romance">
+          <label for="romance">Romantik</label>
+        
+          <input type="checkbox" id="sci-fi" value="sci-fi">
+          <label for="sci-fi">Bilim Kurgu</label>
+        
+          <input type="checkbox" id="thriller" value="thriller">
+          <label for="thriller">Gerilim</label>
+        </div>      
 
-    <section id="films" class="film-container"></section>
-    <div id="filmModal" class="modal hidden">
-      <div class="modal-content">
-        <span id="closeModal" class="close">&times;</span>
-        <h2 id="modalTitle"></h2>
-        <img id="modalPoster" src="" alt="Film Posteri" />
-        <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
-        <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
-        <p id="modalOverview"></p>
+        <button id="refreshBtn">Yenile</button>
+      </section>
+
+      <section id="films" class="film-container"></section>
+      <div id="filmModal" class="modal hidden">
+        <div class="modal-content">
+          <span id="closeModal" class="close">&times;</span>
+          <h2 id="modalTitle"></h2>
+          <img id="modalPoster" src="" alt="Film Posteri" />
+          <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
+          <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
+          <p id="modalOverview"></p>
+        </div>
       </div>
-    </div>
-  </main>   
-
+    </main>
+  </div>
+  <footer>
+    <label
+for="themeToggle"
+class="themeToggle st-sunMoonThemeToggleBtn"
+type="checkbox"
+>
+<input type="checkbox" id="themeToggle" class="themeToggleInput" />
+<svg
+  width="18"
+  height="18"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+  stroke="none"
+>
+  <mask id="moon-mask">
+    <rect x="0" y="0" width="20" height="20" fill="white"></rect>
+    <circle cx="11" cy="3" r="8" fill="black"></circle>
+  </mask>
+  <circle
+    class="sunMoon"
+    cx="10"
+    cy="10"
+    r="8"
+    mask="url(#moon-mask)"
+  ></circle>
+  <g>
+    <circle class="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
+    <circle class="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
+    <circle class="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle>
+    <circle class="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle>
+    <circle class="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle>
+    <circle class="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle>
+  </g>
+</svg>
+</label>
+  </footer>
 
   <script src="script.js"></script>
 </body>
