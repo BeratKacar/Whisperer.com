@@ -41,15 +41,15 @@ async function fetchFilms(categories) {
     }
 
     if (allFilms.length === 0) {
-      displayError("Seçilen kategorilere uygun film bulunamadı.");
+      displayError("The wind isn't whispering to me. There doesn't seem to be anything like what you want. Lets try again.");
       return;
     }
 
     const randomThree = allFilms.sort(() => 0.5 - Math.random()).slice(0, 3);
     displayFilms(randomThree);
   } catch (error) {
-    console.error("Film alınamadı:", error);
-    displayError("Filmler alınırken bir hata oluştu.");
+    console.error("Try again:", error);
+    displayError("WTF is happening? I can't hear a whisper. Oh no! Am i deaf? Lets try again human.");
   }
 }
 
@@ -92,7 +92,7 @@ function displayError(message) {
 refreshBtn.addEventListener("click", () => {
   const categories = getSelectedCategories();
   if (categories.length === 0) {
-    displayError("Lütfen en az bir kategori seçin.");
+    displayError("What? Are you trying to fool me? Select a category human!");
     return;
   }
   fetchFilms(categories);
@@ -130,3 +130,30 @@ window.addEventListener("click", (e) => {
     modal.classList.add("hidden");
   }
 });
+const menuButton = document.getElementById('menuBtn');
+
+menuButton.addEventListener('click', () => {
+  console.log('Menu button clicked!');
+  const dropdown = document.getElementById('dropdown');
+  dropdown.classList.toggle('hidden');
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const loginBtn = document.getElementById('loginBtn');
+  const signupBtn = document.getElementById('signupBtn');
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+      window.location.href = 'login.html'; // login.html dosyasına gider
+    });
+  }
+
+  if (signupBtn) {
+    signupBtn.addEventListener('click', () => {
+      window.location.href = 'signup.html'; // signup.html dosyasına gider
+    });
+  }
+});
+
+
+
