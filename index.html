@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Whisperer</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,12 +21,14 @@
         </div>
       </div>
     </nav>
-    </header>
+  </header>
+  <div id="3d-model" style="width: 100%; height: 600px;"></div>
 
-    <main>
 
-      <div id="main-container">
-        <h1 class="speech"> Tell us human, what are you searching for today?</h1>
+  <main>
+    <div id="main-container">
+      <h1 class="speech">Tell us human, what are you searching for today?</h1>
+      <img src="" alt="">
       <section class="controls">
         <h2 class="category-title" id="toggleCategories">
           <span class="icon">🎞️</span> Kategoriler
@@ -68,16 +71,21 @@
         <div class="modal-content">
           <span id="closeModal" class="close">&times;</span>
           <h2 id="modalTitle"></h2>
+          <div class="modal-info">
+            <p><strong>Çıkış:</strong> <span id="modalDate"></span></p>
+            <p><strong>IMDB:</strong> <span id="modalRating"></span></p>
+          </div>
           <img id="modalPoster" src="" alt="Film Posteri" />
-          <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
-          <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
           <p id="modalOverview"></p>
         </div>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 
-
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
   <script src="script.js"></script>
+
+
 </body>
 </html>

@@ -6,7 +6,6 @@ const categoryButtons = document.getElementById("categoryButtons");
 const API_URL = "https://api.themoviedb.org/3/discover/movie";
 const API_KEY = "70d782d0f4fda375704be7703dbe1753";
 
-
 // Kategori adı -> TMDb genre ID eşleşmesi
 const GENRE_MAP = {
   action: 28,
@@ -41,15 +40,15 @@ async function fetchFilms(categories) {
     }
 
     if (allFilms.length === 0) {
-      displayError("The wind isn't whispering to me. There doesn't seem to be anything like what you want. Lets try again.");
+      displayError("The wind isn't whispering to me. There doesn't seem to be anything like what you want. Let's try again.");
       return;
     }
 
-    const randomThree = allFilms.sort(() => 0.5 - Math.random()).slice(0, 3);
-    displayFilms(randomThree);
+    const randomFour = allFilms.sort(() => 0.5 - Math.random()).slice(0, 4);
+    displayFilms(randomFour);
   } catch (error) {
     console.error("Try again:", error);
-    displayError("WTF is happening? I can't hear a whisper. Oh no! Am i deaf? Lets try again human.");
+    displayError("WTF is happening? I can't hear a whisper. Oh no! Am I deaf? Let's try again human. NOW!");
   }
 }
 
@@ -67,16 +66,21 @@ function displayFilms(films) {
     div.innerHTML = `
       <h3>${film.title}</h3>
       <img src="${posterURL}" alt="${film.title}" />
+      <div class="film-description">
+        ${film.overview || "Bu film hakkında bir açıklama bulunmamaktadır."}
+      </div>
     `;
 
     div.addEventListener("click", () => {
       modalTitle.textContent = film.title;
       modalPoster.src = posterURL;
       modalOverview.textContent = film.overview || "Açıklama bulunamadı.";
-      modalDate.textContent = film.release_date || "Bilinmiyor";
-      modalRating.textContent = film.vote_average || "Yok";
+      modalDate.textContent = film.release_date ? new Date(film.release_date).toLocaleDateString('tr-TR') : "Bilinmiyor";
+      modalRating.textContent = film.vote_average ? `${film.vote_average}/10` : "Puan yok";
 
       modal.classList.remove("hidden");
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
     });
 
     filmsContainer.appendChild(div);
@@ -100,60 +104,119 @@ refreshBtn.addEventListener("click", () => {
 
 // Kategorileri aç/kapat
 toggleBtn.addEventListener("click", () => {
-  categoryButtons.classList.toggle("show");
   categoryButtons.classList.toggle("hidden");
 
   const labels = categoryButtons.querySelectorAll("label");
   labels.forEach((label, index) => {
-    label.style.animationDelay = `${index * 0.1}s`;
+    if (categoryButtons.classList.contains("hidden")) {
+      label.style.animation = "none";
+    } else {
+      label.style.animation = `cardAppear 0.6s ${index * 0.1}s forwards`;
+    }
   });
 });
 
-// Sayfa yüklenince çalış
-fetchFilms(getSelectedCategories());
-
 // MODAL işlemleri
 const modal = document.getElementById("filmModal");
-const closeModal = document.getElementById("closeModal");
+const closeModalBtn = document.getElementById("closeModal");
 const modalTitle = document.getElementById("modalTitle");
 const modalPoster = document.getElementById("modalPoster");
 const modalOverview = document.getElementById("modalOverview");
 const modalDate = document.getElementById("modalDate");
 const modalRating = document.getElementById("modalRating");
 
-closeModal.addEventListener("click", () => {
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.remove("show");
   modal.classList.add("hidden");
+  document.body.style.overflow = "auto";
 });
 
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
+    modal.classList.remove("show");
     modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
   }
 });
-const menuButton = document.getElementById('menuBtn');
 
-menuButton.addEventListener('click', () => {
-  console.log('Menu button clicked!');
+// Menü butonu işlemleri
+  const menuButton = document.getElementById('menuBtn');
+  menuButton.addEventListener('click', () => {
   const dropdown = document.getElementById('dropdown');
   dropdown.classList.toggle('hidden');
 });
 
+// Sayfa yüklenince giriş/kayıt butonları işlemleri
 document.addEventListener("DOMContentLoaded", function() {
   const loginBtn = document.getElementById('loginBtn');
   const signupBtn = document.getElementById('signupBtn');
 
   if (loginBtn) {
     loginBtn.addEventListener('click', () => {
-      window.location.href = 'login.html'; // login.html dosyasına gider
+      window.location.href = 'login.html';
     });
   }
 
   if (signupBtn) {
     signupBtn.addEventListener('click', () => {
-      window.location.href = 'signup.html'; // signup.html dosyasına gider
+      window.location.href = 'signup.html';
     });
   }
 });
 
+  // Sahne, kamera, renderer oluştur
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  const modelContainer = document.getElementById("3d-model");
+  renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+
+  document.getElementById("3d-model").appendChild(renderer.domElement);
+  scene.background = new THREE.Color(0xffffff); // Beyaz arkaplan
 
 
+  // Işık ekle
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 5, 5);
+  scene.add(directionalLight);
+
+
+  // GLTFLoader ile model yükle
+  const loader = new THREE.GLTFLoader();
+  loader.load('skull_low_poly.glb', function(gltf) {
+    const model = gltf.scene;
+    scene.add(model);
+    model.position.set(0, 0, 0);   // Ortaya al
+    model.scale.set(0.3, 0.3, 0.3);
+
+
+
+
+
+    // Modeli başlangıçta biraz döndür
+    model.rotation.x = Math.PI / 2;
+    model.rotation.y = Math.PI / 2;
+
+    // Kamera pozisyonunu ayarla
+    camera.position.z = 20;
+
+    // Animasyon fonksiyonu
+    function animate() {
+      requestAnimationFrame(animate);
+      model.rotation.y += 0.01; // Modeli döndür
+      renderer.render(scene, camera);
+    }
+    animate();
+  });
+
+  // Pencere boyutu değişirse yeniden ayarla
+  window.addEventListener('resize', () => {
+    const modelContainer = document.getElementById("3d-model");
+    renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+    camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
+    camera.updateProjectionMatrix();
+  });
+  
