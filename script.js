@@ -219,3 +219,76 @@ toggleBtn.addEventListener("click", () => {
     }
   });
 });
+// Sahne, kamera, renderer oluştur
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+const modelContainer = document.getElementById("3d-model");
+renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+document.getElementById("3d-model").appendChild(renderer.domElement);
+scene.background = new THREE.Color(0x0a0a0a); // Siyah arkaplan
+
+// Işık ekle
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+// Modeli ve mouse pozisyonunu takip eden değişkenler
+let model = null;
+let mouseX = 0;
+let mouseY = 0;
+
+// Mouse hareketlerini dinle
+document.addEventListener('mousemove', (event) => {
+  const halfWidth = window.innerWidth / 2;
+  const halfHeight = window.innerHeight / 2;
+  mouseX = (event.clientX - halfWidth) / halfWidth;
+  mouseY = (event.clientY - halfHeight) / halfHeight;
+});
+function lerp(start, end, t) {
+  return start + (end - start) * t;
+}
+
+
+// GLTFLoader ile model yükle
+const loader = new THREE.GLTFLoader();
+loader.load('skull_low_poly.glb', function(gltf) {
+  model = gltf.scene;
+  scene.add(model);
+  model.position.set(-10, 0, 0);
+  model.scale.set(0.1, 0.1, 0.1);
+
+  camera.position.z = 100;
+
+  let targetRotationX = 0;
+let targetRotationY = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (model) {
+    // Mouse konumuna göre hedef rotasyonu ayarla
+    targetRotationY = mouseX * 0.5; 
+    targetRotationX = mouseY * 0.5;
+
+    // Şu anki rotasyonu hedefe doğru yumuşakça ilerlet
+    model.rotation.y = lerp(model.rotation.y, targetRotationY, 0.1); 
+    model.rotation.x = lerp(model.rotation.x, targetRotationX, 0.1);
+  }
+
+  renderer.render(scene, camera);
+}
+
+
+  animate();
+});
+
+// Pencere boyutu değişirse yeniden ayarla
+window.addEventListener('resize', () => {
+  const modelContainer = document.getElementById("3d-model");
+  renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+  camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
+  camera.updateProjectionMatrix();
+});

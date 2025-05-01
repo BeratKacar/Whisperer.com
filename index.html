@@ -11,7 +11,7 @@
 <body>
   <header>
     <nav>
-      <img src="WhispererLogo.png" alt="Whisperer Logo" class="site-logo" />
+      <img src="assets/3.png" alt="Whisperer Logo" class="site-logo" />
       <h1>Whisperer</h1>
       <div class="menu">
         <button id="menuBtn">☰</button>
@@ -24,6 +24,7 @@
   </header>
 
   <main>
+    <div id="3d-model" style="width: 100%; height: 600px;"></div>
     <div id="main-container">
       <h1 class="speech">Tell us human, what are you searching for today?</h1>
       <section class="controls">
@@ -108,5 +109,7 @@
   </div>
   
 </body>
-
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="script.js"></script>
 </html>

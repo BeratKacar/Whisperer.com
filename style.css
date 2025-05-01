@@ -27,7 +27,7 @@ body {
 
 /* Navigation */
 nav {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #011027;
   display: flex;
   justify-content: space-between;
   align-items: center;
