@@ -56,8 +56,10 @@ nav h1 {
   color: transparent;
 }
 
+/* MENÜ STİLLERİ */
 .menu {
   position: relative;
+  display: inline-block;
 }
 
 #menuBtn {
@@ -66,13 +68,13 @@ nav h1 {
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
+  padding: 0.5rem 1rem;
   transition: all 0.3s ease;
-  padding: 0.5rem;
+  z-index: 1001;
 }
 
 #menuBtn:hover {
   color: var(--primary);
-  transform: scale(1.1);
 }
 
 .dropdown {
@@ -82,33 +84,36 @@ nav h1 {
   background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  min-width: 180px;
-  transform: scale(0);
+  min-width: 200px;
+  transform: scale(0.95);
   opacity: 0;
+  visibility: hidden;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 1001;
+  transform-origin: top right;
+  z-index: 1000;
 }
 
-.dropdown.show {
+.dropdown.active {
   transform: scale(1);
   opacity: 1;
+  visibility: visible;
 }
 
-.dropdown button {
+.dropdown-item {
   width: 100%;
-  padding: 0.75rem 1.5rem;
+  padding: 12px 16px;
   text-align: left;
   background: none;
   border: none;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
   transition: all 0.2s ease;
-  font-family: 'Poppins', sans-serif;
 }
 
-.dropdown button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--primary);
+.dropdown-item:hover {
+  background: rgba(255, 107, 107, 0.1);
 }
 
 @keyframes float {

@@ -114,11 +114,10 @@ async function fetchTrailer(movieTitle, movieId) {
   }
 }
 const filmClickMessages = [
-  "Ah, iyi seçim! Bu film hakkında konuşalım...",
-  "Hmm, bu ilginç bir seçim!",
-  "Bu filmi ben de merak etmiştim!",
-  "Fragmanı birlikte izleyelim mi?",
-  "Vay, gerçekten bunu mu seçtin? 😏"
+  "Good choice!",
+  "Hmm, Nice catch!",
+  "I like your taste!",
+  "Hey hey show me a fragman too!",
 ];
 function openFilmModal(film) {
   const randomMessage = filmClickMessages[Math.floor(Math.random() * filmClickMessages.length)];
@@ -196,10 +195,37 @@ window.addEventListener("click", (e) => {
   }
 });
 
-const menuButton = document.getElementById('menuBtn');
-menuButton.addEventListener('click', () => {
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.getElementById('menuBtn');
   const dropdown = document.getElementById('dropdown');
-  dropdown.classList.toggle('hidden');
+  
+  // Menü butonu tıklama
+  if (menuButton && dropdown) {
+    menuButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+      
+      // Buton animasyonu
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+  }
+
+  // Dışarı tıklayınca kapat
+  document.addEventListener('click', function() {
+    if (dropdown.classList.contains('active')) {
+      dropdown.classList.remove('active');
+    }
+  });
+
+  // Dropdown içindeki tıklamaları yakala
+  dropdown?.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+
+  // Diğer fonksiyonlar...
 });
 
 document.addEventListener("DOMContentLoaded", function() {
