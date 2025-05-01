@@ -2,59 +2,33 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login - Whisperer</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #1a1a1a;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    .form-container {
-      background: #333;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      width: 300px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #ff6600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      color: white;
-    }
-    button:hover {
-      background-color: #e65c00;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whisperer - Giriş Yap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-
-<div class="form-container">
-  <h1>Login</h1>
-  <form>
-    <input type="email" placeholder="Email" required>
-    <input type="password" placeholder="Password" required>
-    <button type="submit">Log In</button>
-  </form>
-</div>
-
+  <div class="auth-container">
+    <div class="auth-header">
+      <img src="assets/3.png" alt="Whisperer Logo" class="auth-logo">
+      <h1>Whisperer'a Hoş Geldin</h1>
+    </div>
+    
+    <form id="loginForm" class="auth-form">
+      <div class="input-group">
+        <input type="text" id="loginUsername" placeholder="Kullanıcı Adı veya E-posta" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="loginPassword" placeholder="Şifre" required>
+      </div>
+      <button type="submit" class="auth-btn">Giriş Yap</button>
+    </form>
+    
+    <div class="auth-footer">
+      <p>Hesabın yok mu? <a href="signup.html">Kayıt Ol</a></p>
+      <a href="#" class="forgot-password">Şifremi Unuttum</a>
+    </div>
+  </div>
+  <script src="auth.js"></script>
 </body>
 </html>

@@ -2,60 +2,38 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign Up - Whisperer</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #1a1a1a;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    .form-container {
-      background: #333;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      width: 300px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #ff6600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      color: white;
-    }
-    button:hover {
-      background-color: #e65c00;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whisperer - Kayıt Ol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-
-<div class="form-container">
-  <h1>Sign Up</h1>
-  <form>
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email" required>
-    <input type="password" placeholder="Password" required>
-    <button type="submit">Sign Up</button>
-  </form>
-</div>
-
+  <div class="auth-container">
+    <div class="auth-header">
+      <img src="assets/3.png" alt="Whisperer Logo" class="auth-logo">
+      <h1>Whisperer'a Katıl</h1>
+    </div>
+    
+    <form id="signupForm" class="auth-form">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="E-posta" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Şifre" required minlength="6">
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirmPassword" placeholder="Şifre Tekrar" required>
+      </div>
+      <button type="submit" class="auth-btn">Kayıt Ol</button>
+    </form>
+    
+    <div class="auth-footer">
+      <p>Zaten hesabın var mı? <a href="login.html">Giriş Yap</a></p>
+    </div>
+  </div>
+  <script src="auth.js"></script>
 </body>
 </html>
