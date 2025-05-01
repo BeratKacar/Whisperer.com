@@ -219,14 +219,46 @@ toggleBtn.addEventListener("click", () => {
     }
   });
 });
+const messages = [
+  "Tell us human, what are you searching for today?",
+  "Yeah yeah. I'm a flying skull ,what a miracle! If you're done being surprised, it's time to choose.",
+];
+
+const bubble = document.getElementById("speech-bubble");
+let index = 0;
+let charIndex = 0;
+
+function typeText(text, callback) {
+  if (charIndex < text.length) {
+    bubble.innerHTML += text.charAt(charIndex);
+    charIndex++;
+    setTimeout(() => typeText(text, callback), 50);
+  } else {
+    // Tamamlandığında 4 saniye bekle, sonra callback'i çağır
+    setTimeout(callback, 4000);
+  }
+}
+
+function startTypingSequence() {
+  if (index < messages.length) {
+    bubble.innerHTML = ""; // Eski yazıyı sil
+    charIndex = 0;
+    typeText(messages[index], () => {
+      index++;
+      startTypingSequence(); // Sonraki metni yaz
+    });
+  }
+}
+
+startTypingSequence(); // Başlat
 // Sahne, kamera, renderer oluştur
-const scene = new THREE.Scene();
+const scene = new THREE.Scene(); 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-const modelContainer = document.getElementById("3d-model");
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+const modelContainer = document.getElementById("3d");
 renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
-document.getElementById("3d-model").appendChild(renderer.domElement);
-scene.background = new THREE.Color(0x0a0a0a); // Siyah arkaplan
+document.getElementById("3d").appendChild(renderer.domElement);
+renderer.setClearColor(0x000000, 0);
 
 // Işık ekle
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -287,7 +319,7 @@ function animate() {
 
 // Pencere boyutu değişirse yeniden ayarla
 window.addEventListener('resize', () => {
-  const modelContainer = document.getElementById("3d-model");
+  const modelContainer = document.getElementById("3d");
   renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
   camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
   camera.updateProjectionMatrix();

@@ -11,7 +11,7 @@
 <body>
   <header>
     <nav>
-      <img src="assets/3.png" alt="Whisperer Logo" class="site-logo" />
+      <a href="http://127.0.0.1:5500/index.html"><img src="assets/3.png" alt="Whisperer Logo" class="site-logo"></a>
       <h1>Whisperer</h1>
       <div class="menu">
         <button id="menuBtn">☰</button>
@@ -24,9 +24,29 @@
   </header>
 
   <main>
-    <div id="3d-model" style="width: 100%; height: 600px;"></div>
+    <div id="3d" style="
+      position: relative; width: 100%; 
+      height: 600px; 
+      background:transparent;
+      background: transparent;
+      position: relative;
+      animation: float 3s ease-in-out infinite;">
+      <div id="speech-bubble" style="
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        background: rgba(255, 255, 255, 0.8);
+        color: black;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        pointer-events: none;
+      ">
+      </div>
+    </div>
     <div id="main-container">
-      <h1 class="speech">Tell us human, what are you searching for today?</h1>
       <section class="controls">
         <h2 class="category-title" id="toggleCategories">
           <span class="icon">🎞️</span> Kategoriler
@@ -66,7 +86,6 @@
 
       <section id="films" class="film-container"></section>
 
-      <!-- Modal içeriğinde fragman bölümü için yer açıldı -->
       <div id="filmModal" class="modal hidden">
         <div class="modal-content" id="modalContent">
           <span id="closeModal" class="close">&times;</span>
@@ -77,15 +96,16 @@
           </div>
           <img id="modalPoster" src="" alt="Film Posteri" />
           <p id="modalOverview"></p>
-          <!-- Fragman bölümü buraya JavaScript tarafından eklenecek -->
           <div id="trailerContainer"></div>
         </div>
       </div>
 
     </div>
   </main>
-
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
   <script src="script.js"></script>
+
   <div id="filmModal" class="modal">
     <div id="modalContent" class="modal-content">
       <span id="closeModal" class="close">&times;</span>
@@ -109,7 +129,4 @@
   </div>
   
 </body>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="script.js"></script>
 </html>
