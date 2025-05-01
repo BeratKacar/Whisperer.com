@@ -72,10 +72,21 @@ function displayFilms(films) {
   });
 }
 
-function displayError(message) {
+function displayError(message, showInBubble = false) {
   filmsContainer.innerHTML = `<p class="error-message">${message}</p>`;
+  
+  if (showInBubble) {
+    const bubble = document.getElementById("speech-bubble");
+    bubble.textContent = message;
+    bubble.style.display = "block";
+    
+    // 3 saniye sonra eski mesajlara dön
+    setTimeout(() => {
+      index = 0;
+      startTypingSequence();
+    }, 7000);
+  }
 }
-
 async function fetchTrailer(movieTitle, movieId) {
   try {
     const tmdbRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
@@ -102,8 +113,18 @@ async function fetchTrailer(movieTitle, movieId) {
     return null;
   }
 }
-
+const filmClickMessages = [
+  "Ah, iyi seçim! Bu film hakkında konuşalım...",
+  "Hmm, bu ilginç bir seçim!",
+  "Bu filmi ben de merak etmiştim!",
+  "Fragmanı birlikte izleyelim mi?",
+  "Vay, gerçekten bunu mu seçtin? 😏"
+];
 function openFilmModal(film) {
+  const randomMessage = filmClickMessages[Math.floor(Math.random() * filmClickMessages.length)];
+  
+  // Konuşma balonunda göster
+  showTemporaryMessage(randomMessage);
   const posterURL = film.poster_path
     ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
     : 'https://via.placeholder.com/200x300?text=Poster+Yok';
@@ -201,7 +222,8 @@ document.addEventListener("DOMContentLoaded", function() {
 refreshBtn.addEventListener("click", () => {
   const categories = getSelectedCategories();
   if (categories.length === 0) {
-    displayError("What? Are you trying to fool me? Select a category human!");
+    const errorMsg = "What? Are you trying to fool me? Select a category human!";
+    displayError(errorMsg, true); // İkinci parametre true yaparak balonda göster
     return;
   }
   fetchFilms(categories);
@@ -221,43 +243,97 @@ toggleBtn.addEventListener("click", () => {
 });
 const messages = [
   "Tell us human, what are you searching for today?",
-  "Yeah yeah. I'm a flying skull ,what a miracle! If you're done being surprised, it's time to choose.",
+  "Yeah yeah. I'm a flying skull, what a miracle! If you're done being surprised, it's time to choose.",
+  "I can hear the wind whispering. It says you want to watch a movie.",
+  "Tell me, human, did I.Valentinian kick the bucket? That sickly bastard might’ve even tricked death itself.",
+  "I' m 538 years old, but I still don't know what a movie is. Can you tell me?",
+  "Hey,hey. Tell me human? What's year is it?",
+  "Dead not deadend. Look at me, ı'm a flying skull!",
+  "Did you read the 'Eyes'. 10/10 would ‘read’ again… if I had eyes. Or a attention span. Or the will to live after Russian literature",
+  "All that whispers. Hey. Let me tell you the meaning of life. The whole points is- (WHATS MOM! I DON'T WANT DİNNER!)"
+
+
 ];
 
 const bubble = document.getElementById("speech-bubble");
 let index = 0;
 let charIndex = 0;
+let currentAnimation = null;
+let currentTimeout = null;
 
-function typeText(text, callback) {
-  if (charIndex < text.length) {
-    bubble.innerHTML += text.charAt(charIndex);
-    charIndex++;
-    setTimeout(() => typeText(text, callback), 50);
-  } else {
-    // Tamamlandığında 4 saniye bekle, sonra callback'i çağır
-    setTimeout(callback, 4000);
-  }
+// Tüm animasyonları ve zamanlayıcıları temizle
+function clearAllAnimations() {
+  clearInterval(currentAnimation);
+  clearTimeout(currentTimeout);
+  currentAnimation = null;
+  currentTimeout = null;
 }
 
+// Güncellenmiş typeText fonksiyonu
+function typeText(text, callback) {
+  clearAllAnimations();
+  bubble.innerHTML = "";
+  charIndex = 0;
+  
+  currentAnimation = setInterval(() => {
+    if (charIndex < text.length) {
+      bubble.innerHTML += text.charAt(charIndex);
+      charIndex++;
+    } else {
+      clearInterval(currentAnimation);
+      currentAnimation = null;
+      if (callback) {
+        currentTimeout = setTimeout(callback, 4000);
+      }
+    }
+  }, 50);
+}
+
+// Geçici mesaj gösterimi (ERROR mesajları için)
+function showTemporaryMessage(message, duration = 3000) {
+  clearAllAnimations();
+  bubble.innerHTML = message; // Anında göster (animasyonsuz)
+  
+  currentTimeout = setTimeout(() => {
+    index = 0;
+    startTypingSequence();
+  }, duration);
+}
+
+// Orijinal animasyon döngüsü
 function startTypingSequence() {
+  clearAllAnimations();
+  
   if (index < messages.length) {
-    bubble.innerHTML = ""; // Eski yazıyı sil
-    charIndex = 0;
     typeText(messages[index], () => {
       index++;
-      startTypingSequence(); // Sonraki metni yaz
+      startTypingSequence();
     });
+  } else {
+    index = 0;
+    startTypingSequence();
   }
 }
 
-startTypingSequence(); // Başlat
+// Başlangıç animasyonunu başlat
+startTypingSequence();
+
+// Error mesajı gösteren fonksiyon
+function displayError(message, showInBubble = false) {
+  filmsContainer.innerHTML = "";
+  
+  if (showInBubble) {
+    showTemporaryMessage(message);
+  }
+}
+
 // Sahne, kamera, renderer oluştur
 const scene = new THREE.Scene(); 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
-const modelContainer = document.getElementById("3d");
+const modelContainer = document.getElementById("t-d");
 renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
-document.getElementById("3d").appendChild(renderer.domElement);
+document.getElementById("t-d").appendChild(renderer.domElement);
 renderer.setClearColor(0x000000, 0);
 
 // Işık ekle
@@ -319,7 +395,7 @@ function animate() {
 
 // Pencere boyutu değişirse yeniden ayarla
 window.addEventListener('resize', () => {
-  const modelContainer = document.getElementById("3d");
+  const modelContainer = document.getElementById("t-d");
   renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
   camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
   camera.updateProjectionMatrix();

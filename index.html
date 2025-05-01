@@ -24,26 +24,10 @@
   </header>
 
   <main>
-    <div id="3d" style="
-      position: relative; width: 100%; 
-      height: 600px; 
-      background:transparent;
-      background: transparent;
-      position: relative;
-      animation: float 3s ease-in-out infinite;">
-      <div id="speech-bubble" style="
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-        background: rgba(255, 255, 255, 0.8);
-        color: black;
-        padding: 10px 15px;
-        border-radius: 10px;
-        font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        pointer-events: none;
-      ">
+    <div id="t-d-container">
+      <div id="t-d">
+        <div id="speech-bubble">
+        </div>
       </div>
     </div>
     <div id="main-container">
@@ -85,48 +69,35 @@
       </section>
 
       <section id="films" class="film-container"></section>
-
-      <div id="filmModal" class="modal hidden">
-        <div class="modal-content" id="modalContent">
+      <div id="filmModal" class="modal">
+        <div id="modalContent" class="modal-content">
           <span id="closeModal" class="close">&times;</span>
-          <h2 id="modalTitle"></h2>
-          <div class="modal-info">
-            <p><strong>Çıkış:</strong> <span id="modalDate"></span></p>
-            <p><strong>IMDB:</strong> <span id="modalRating"></span></p>
+          <div class="modal-header">
+            <img id="modalPoster" alt="Poster" class="modal-poster" />
+            <div class="modal-details">
+              <h2 id="modalTitle"></h2>
+              <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
+              <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
+            </div>
           </div>
-          <img id="modalPoster" src="" alt="Film Posteri" />
-          <p id="modalOverview"></p>
-          <div id="trailerContainer"></div>
+          <div id="modalOverview" class="modal-overview"></div>
+      
+          <div class="trailer-container">
+            <button id="playTrailerBtn">Fragmanı Oynat</button>
+            <div id="trailerPlayer" class="hidden">
+              <iframe id="youtubeIframe" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
         </div>
       </div>
 
+      
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
   <script src="script.js"></script>
 
-  <div id="filmModal" class="modal">
-    <div id="modalContent" class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <div class="modal-header">
-        <img id="modalPoster" alt="Poster" class="modal-poster" />
-        <div class="modal-details">
-          <h2 id="modalTitle"></h2>
-          <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
-          <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
-        </div>
-      </div>
-      <div id="modalOverview" class="modal-overview"></div>
-  
-      <div class="trailer-container">
-        <button id="playTrailerBtn">Fragmanı Oynat</button>
-        <div id="trailerPlayer" class="hidden">
-          <iframe id="youtubeIframe" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
   
 </body>
 </html>
