@@ -220,27 +220,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Dropdown içindeki tıklamaları yakala
   dropdown?.addEventListener('click', function(e) {
     e.stopPropagation();
   });
 
-  // Diğer fonksiyonlar...
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  const loginBtn = document.getElementById('loginBtn');
   const signupBtn = document.getElementById('signupBtn');
-
-  if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
-      window.location.href = 'login.html';
-    });
-  }
 
   if (signupBtn) {
     signupBtn.addEventListener('click', () => {
-      window.location.href = 'signup.html';
+      window.location.href = 'signup2.html';
     });
   }
 });
