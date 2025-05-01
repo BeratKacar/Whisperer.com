@@ -6,7 +6,6 @@ const categoryButtons = document.getElementById("categoryButtons");
 const API_URL = "https://api.themoviedb.org/3/discover/movie";
 const API_KEY = "70d782d0f4fda375704be7703dbe1753";
 
-// Kategori adı -> TMDb genre ID eşleşmesi
 const GENRE_MAP = {
   action: 28,
   comedy: 35,
@@ -19,13 +18,11 @@ const GENRE_MAP = {
   documentary: 99,
 };
 
-// Seçili kategorileri al
 function getSelectedCategories() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
   return Array.from(checkboxes).map(cb => cb.value);
 }
 
-// Filmleri al ve göster
 async function fetchFilms(categories) {
   try {
     const allFilms = [];
@@ -48,11 +45,10 @@ async function fetchFilms(categories) {
     displayFilms(randomFour);
   } catch (error) {
     console.error("Try again:", error);
-    displayError("WTF is happening? I can't hear a whisper. Oh no! Am I deaf? Let's try again human. NOW!");
+    displayError("WTF is happening? I can't hear a whisper. Oh no! Am I deaf? Let's try again human.");
   }
 }
 
-// Filmleri sayfada göster
 function displayFilms(films) {
   filmsContainer.innerHTML = "";
   films.forEach(film => {
@@ -71,82 +67,120 @@ function displayFilms(films) {
       </div>
     `;
 
-    div.addEventListener("click", () => {
-      modalTitle.textContent = film.title;
-      modalPoster.src = posterURL;
-      modalOverview.textContent = film.overview || "Açıklama bulunamadı.";
-      modalDate.textContent = film.release_date ? new Date(film.release_date).toLocaleDateString('tr-TR') : "Bilinmiyor";
-      modalRating.textContent = film.vote_average ? `${film.vote_average}/10` : "Puan yok";
-
-      modal.classList.remove("hidden");
-      modal.classList.add("show");
-      document.body.style.overflow = "hidden";
-    });
-
+    div.addEventListener("click", () => openFilmModal(film));
     filmsContainer.appendChild(div);
   });
 }
 
-// Hata mesajı göster
 function displayError(message) {
   filmsContainer.innerHTML = `<p class="error-message">${message}</p>`;
 }
 
-// Yenile butonuna tıklanınca
-refreshBtn.addEventListener("click", () => {
-  const categories = getSelectedCategories();
-  if (categories.length === 0) {
-    displayError("What? Are you trying to fool me? Select a category human!");
-    return;
+async function fetchTrailer(movieTitle, movieId) {
+  try {
+    const tmdbRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
+    const tmdbData = await tmdbRes.json();
+
+    const trailer = tmdbData.results.find(video =>
+      video.type === 'Trailer' && video.site === 'YouTube'
+    );
+
+    if (trailer) {
+      return trailer.key;
+    }
+
+    const youtubeRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(movieTitle + " fragman")}&key=YOUR_YOUTUBE_API_KEY&maxResults=1`);
+    const youtubeData = await youtubeRes.json();
+
+    if (youtubeData.items && youtubeData.items.length > 0) {
+      return youtubeData.items[0].id.videoId;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Fragman bulunamadı:", error);
+    return null;
   }
-  fetchFilms(categories);
-});
+}
 
-// Kategorileri aç/kapat
-toggleBtn.addEventListener("click", () => {
-  categoryButtons.classList.toggle("hidden");
+function openFilmModal(film) {
+  const posterURL = film.poster_path
+    ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
+    : 'https://via.placeholder.com/200x300?text=Poster+Yok';
 
-  const labels = categoryButtons.querySelectorAll("label");
-  labels.forEach((label, index) => {
-    if (categoryButtons.classList.contains("hidden")) {
-      label.style.animation = "none";
+  modalTitle.textContent = film.title;
+  modalPoster.src = posterURL;
+  modalOverview.textContent = film.overview || "Açıklama bulunamadı.";
+  modalDate.textContent = film.release_date ? new Date(film.release_date).toLocaleDateString('tr-TR') : "Bilinmiyor";
+  modalRating.textContent = film.vote_average ? `${film.vote_average}/10` : "Puan yok";
+
+  const oldTrailerContainer = document.querySelector('.trailer-container');
+  if (oldTrailerContainer) oldTrailerContainer.remove();
+
+  const trailerHTML = `
+    <div class="trailer-container">
+      <button id="playTrailerBtn">Fragmanı Oynat</button>
+      <div id="trailerPlayer" class="hidden">
+        <iframe id="youtubeIframe" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  `;
+
+  modalContent.insertAdjacentHTML('beforeend', trailerHTML);
+
+  document.getElementById('playTrailerBtn').addEventListener('click', async () => {
+    const trailerBtn = document.getElementById('playTrailerBtn');
+    trailerBtn.textContent = "Fragman yükleniyor...";
+    trailerBtn.disabled = true;
+
+    const videoId = await fetchTrailer(film.title, film.id);
+
+    if (videoId) {
+      const trailerPlayer = document.getElementById('trailerPlayer');
+      const youtubeIframe = document.getElementById('youtubeIframe');
+      youtubeIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      trailerPlayer.classList.remove('hidden');
+      trailerBtn.classList.add('hidden');
     } else {
-      label.style.animation = `cardAppear 0.6s ${index * 0.1}s forwards`;
+      trailerBtn.textContent = "Fragman bulunamadı";
+      setTimeout(() => {
+        trailerBtn.textContent = "Fragmanı Oynat";
+        trailerBtn.disabled = false;
+      }, 2000);
     }
   });
-});
 
-// MODAL işlemleri
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
 const modal = document.getElementById("filmModal");
-const closeModalBtn = document.getElementById("closeModal");
+const closeModal = document.getElementById("closeModal");
 const modalTitle = document.getElementById("modalTitle");
 const modalPoster = document.getElementById("modalPoster");
 const modalOverview = document.getElementById("modalOverview");
 const modalDate = document.getElementById("modalDate");
 const modalRating = document.getElementById("modalRating");
+const modalContent = document.getElementById("modalContent");
 
-closeModalBtn.addEventListener("click", () => {
+closeModal.addEventListener("click", () => {
   modal.classList.remove("show");
-  modal.classList.add("hidden");
   document.body.style.overflow = "auto";
 });
 
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal.classList.remove("show");
-    modal.classList.add("hidden");
     document.body.style.overflow = "auto";
   }
 });
 
-// Menü butonu işlemleri
-  const menuButton = document.getElementById('menuBtn');
-  menuButton.addEventListener('click', () => {
+const menuButton = document.getElementById('menuBtn');
+menuButton.addEventListener('click', () => {
   const dropdown = document.getElementById('dropdown');
   dropdown.classList.toggle('hidden');
 });
 
-// Sayfa yüklenince giriş/kayıt butonları işlemleri
 document.addEventListener("DOMContentLoaded", function() {
   const loginBtn = document.getElementById('loginBtn');
   const signupBtn = document.getElementById('signupBtn');
@@ -164,59 +198,24 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-  // Sahne, kamera, renderer oluştur
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer();
-  const modelContainer = document.getElementById("3d-model");
-  renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+refreshBtn.addEventListener("click", () => {
+  const categories = getSelectedCategories();
+  if (categories.length === 0) {
+    displayError("What? Are you trying to fool me? Select a category human!");
+    return;
+  }
+  fetchFilms(categories);
+});
 
-  document.getElementById("3d-model").appendChild(renderer.domElement);
-  scene.background = new THREE.Color(0xffffff); // Beyaz arkaplan
+toggleBtn.addEventListener("click", () => {
+  categoryButtons.classList.toggle("hidden");
 
-
-  // Işık ekle
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-  scene.add(ambientLight);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(5, 5, 5);
-  scene.add(directionalLight);
-
-
-  // GLTFLoader ile model yükle
-  const loader = new THREE.GLTFLoader();
-  loader.load('skull_low_poly.glb', function(gltf) {
-    const model = gltf.scene;
-    scene.add(model);
-    model.position.set(0, 0, 0);   // Ortaya al
-    model.scale.set(0.3, 0.3, 0.3);
-
-
-
-
-
-    // Modeli başlangıçta biraz döndür
-    model.rotation.x = Math.PI / 2;
-    model.rotation.y = Math.PI / 2;
-
-    // Kamera pozisyonunu ayarla
-    camera.position.z = 20;
-
-    // Animasyon fonksiyonu
-    function animate() {
-      requestAnimationFrame(animate);
-      model.rotation.y += 0.01; // Modeli döndür
-      renderer.render(scene, camera);
+  const labels = categoryButtons.querySelectorAll("label");
+  labels.forEach((label, index) => {
+    if (categoryButtons.classList.contains("hidden")) {
+      label.style.animation = "none";
+    } else {
+      label.style.animation = `cardAppear 0.6s ${index * 0.1}s forwards`;
     }
-    animate();
   });
-
-  // Pencere boyutu değişirse yeniden ayarla
-  window.addEventListener('resize', () => {
-    const modelContainer = document.getElementById("3d-model");
-    renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
-    camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
-    camera.updateProjectionMatrix();
-  });
-  
+});

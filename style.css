@@ -254,20 +254,19 @@ button:active {
 }
 
 .film {
-  background: var(--card-bg);
+  width: 250px;
+  margin: 10px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: transparent;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  cursor: pointer;
 }
 
 .film:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
 .film h3 {
@@ -277,14 +276,16 @@ button:active {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .film img {
   width: 100%;
-  height: 330px;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  height: auto;
+  border-radius: 16px;
+  display: block;
 }
+
 
 .film:hover img {
   transform: scale(1.05);
@@ -292,21 +293,28 @@ button:active {
 
 .film-description {
   position: absolute;
-  bottom: -100%;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem;
-  color: white;
-  transition: bottom 0.3s ease;
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.film:hover .film-description {
   bottom: 0;
-}
+  width: 100%;
+  max-height: 60%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: justify;
+  border-radius: 0 0 16px 16px;
 
+  /* Hover dışında görünmesin */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+.film:hover .film-description {
+  opacity: 1;
+  pointer-events: auto;
+}
 /* Modal */
 .modal {
   position: fixed;
@@ -453,4 +461,163 @@ button:active {
   .modal-content {
     padding: 1rem;
   }
+}
+/* Fragman bölümü stilleri */
+.trailer-container {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+#playTrailerBtn {
+  background: linear-gradient(to right, #ff0000, #cc0000);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+#playTrailerBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+#playTrailerBtn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+#trailerPlayer {
+  margin-top: 1rem;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+#trailerPlayer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(10, 10, 30, 0.95);
+  padding: 2rem;
+}
+
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #1a1a2e;
+  color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-poster {
+  width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.modal-details h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.modal-overview {
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.trailer-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#playTrailerBtn {
+  background: linear-gradient(to right, #0fd850, #00f2fe);
+  border: none;
+  padding: 10px 20px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#playTrailerBtn.hidden {
+  display: none;
+}
+
+#trailerPlayer iframe {
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+.site-header {
+  display: flex;
+  align-items: center;
+  background-color: #0a0a23;
+  padding: 1rem 2rem;
+  color: white;
+}
+
+.site-logo {
+  height: 100px;
+  margin-right: 1rem;
+}
+
+.site-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+}
+.card-overview {
+  display: -webkit-box;
+  display: box; /* bazı modern tarayıcılar için */
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }

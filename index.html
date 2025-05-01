@@ -11,7 +11,7 @@
 <body>
   <header>
     <nav>
-      <img src="assets/indir (3).jpg" alt="Logo" class="logo" />
+      <img src="WhispererLogo.png" alt="Whisperer Logo" class="site-logo" />
       <h1>Whisperer</h1>
       <div class="menu">
         <button id="menuBtn">☰</button>
@@ -22,13 +22,10 @@
       </div>
     </nav>
   </header>
-  <div id="3d-model" style="width: 100%; height: 600px;"></div>
-
 
   <main>
     <div id="main-container">
       <h1 class="speech">Tell us human, what are you searching for today?</h1>
-      <img src="" alt="">
       <section class="controls">
         <h2 class="category-title" id="toggleCategories">
           <span class="icon">🎞️</span> Kategoriler
@@ -67,8 +64,10 @@
       </section>
 
       <section id="films" class="film-container"></section>
+
+      <!-- Modal içeriğinde fragman bölümü için yer açıldı -->
       <div id="filmModal" class="modal hidden">
-        <div class="modal-content">
+        <div class="modal-content" id="modalContent">
           <span id="closeModal" class="close">&times;</span>
           <h2 id="modalTitle"></h2>
           <div class="modal-info">
@@ -77,15 +76,37 @@
           </div>
           <img id="modalPoster" src="" alt="Film Posteri" />
           <p id="modalOverview"></p>
+          <!-- Fragman bölümü buraya JavaScript tarafından eklenecek -->
+          <div id="trailerContainer"></div>
         </div>
       </div>
+
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
   <script src="script.js"></script>
-
-
+  <div id="filmModal" class="modal">
+    <div id="modalContent" class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <div class="modal-header">
+        <img id="modalPoster" alt="Poster" class="modal-poster" />
+        <div class="modal-details">
+          <h2 id="modalTitle"></h2>
+          <p><strong>Çıkış Tarihi:</strong> <span id="modalDate"></span></p>
+          <p><strong>IMDB Puanı:</strong> <span id="modalRating"></span></p>
+        </div>
+      </div>
+      <div id="modalOverview" class="modal-overview"></div>
+  
+      <div class="trailer-container">
+        <button id="playTrailerBtn">Fragmanı Oynat</button>
+        <div id="trailerPlayer" class="hidden">
+          <iframe id="youtubeIframe" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </body>
+
 </html>
