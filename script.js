@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (signupBtn) {
     signupBtn.addEventListener('click', () => {
-      window.location.href = 'signup2.html';
+      window.location.href = 'signup.html';
     });
   }
 });
@@ -300,7 +300,7 @@ function typeText(text, callback) {
       clearInterval(currentAnimation);
       currentAnimation = null;
       if (callback) {
-        currentTimeout = setTimeout(callback, 4000);
+        currentTimeout = setTimeout(callback, 10000);
       }
     }
   }, 50);
@@ -379,16 +379,16 @@ function lerp(start, end, t) {
 
 // GLTFLoader ile model yükle
 const loader = new THREE.GLTFLoader();
-loader.load('skull_low_poly.glb', function(gltf) {
+loader.load('2.glb', function(gltf) {
   model = gltf.scene;
   scene.add(model);
-  model.position.set(-10, 0, 0);
-  model.scale.set(0.1, 0.1, 0.1);
+  model.position.set(0, -7, 0);
+  model.scale.set(35, 35, 35); 
 
-  camera.position.z = 100;
+  camera.position.z = 25;
 
   let targetRotationX = 0;
-let targetRotationY = 0;
+  let targetRotationY = 0;
 
 function animate() {
   requestAnimationFrame(animate);

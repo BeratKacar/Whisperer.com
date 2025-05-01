@@ -7,19 +7,21 @@
 .container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    gap:1rem;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     background-color: #121212;
 }
 .t-d-container{
-    flex: 1;
+    flex-basis: 40vw;
     background: linear-gradient(135deg, var(#121212) 0%, #0a0a0a 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; 
-    width: 50wv;
+    position: relative;
+    width: 50vw;
     height: 100vh;
     background: transparent;
     animation: float 3s ease-in-out infinite;
@@ -35,15 +37,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.7);
-    width: 100%;
+    width: 120%;
     height: 600px;
      /* Modelin orijinal yüksekliği */
   }
   #speech-bubble{
     position: absolute;
-    top: 30%; /* Yukarıya yakın */
+    top: 25%; /* Yukarıya yakın */
     left: 50%;
-    transform: translate(-50%, -150%); /* -150% ile daha yukarıda */
+    transform: translate(-50%, -100%); /* -150% ile daha yukarıda */
     background: rgba(255, 255, 255, 0.8);
     color: black;
     padding: 10px 15px;
@@ -60,7 +62,7 @@
     --bg-color: rgba(30, 30, 30, 0.8); /* auth-container background */
     --bg-color-alt: #121212; /* dark */
     --main-color: #4ecdc4; /* secondary */
-    flex: 1;
+    flex-basis: 40vw;
     display: flex;
     justify-content: center;
     align-items:center;

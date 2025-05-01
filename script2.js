@@ -12,7 +12,7 @@ renderer.setClearColor(0x000000, 0);
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(5, 5, 5);
+directionalLight.position.set(10, 10, 10);
 scene.add(directionalLight);
 
 // Modeli ve mouse pozisyonunu takip eden değişkenler
@@ -34,13 +34,13 @@ function lerp(start, end, t) {
 
 // GLTFLoader ile model yükle
 const loader = new THREE.GLTFLoader();
-loader.load('skull_low_poly.glb', function(gltf) {
+loader.load('4.glb', function(gltf) {
   model = gltf.scene;
   scene.add(model);
-  model.position.set(-10, 0, 0);
-  model.scale.set(0.1, 0.1, 0.1);
+  model.position.set(0, -4, 0);
+  model.scale.set(25, 25, 25); 
 
-  camera.position.z = 75;
+  camera.position.z = 15;
 
   let targetRotationX = 0;
 let targetRotationY = 0;
@@ -50,12 +50,12 @@ function animate() {
 
   if (model) {
     // Mouse konumuna göre hedef rotasyonu ayarla
-    targetRotationY = mouseX * 0.5; 
+    targetRotationY = mouseX * 0.4; 
     targetRotationX = mouseY * 0.5;
 
     // Şu anki rotasyonu hedefe doğru yumuşakça ilerlet
-    model.rotation.y = lerp(model.rotation.y, targetRotationY, 0.1); 
-    model.rotation.x = lerp(model.rotation.x, targetRotationX, 0.1);
+    model.rotation.y = lerp(model.rotation.y, targetRotationY, 0.09); 
+    model.rotation.x = lerp(model.rotation.x, targetRotationX, 0.09);
   }
 
   renderer.render(scene, camera);
@@ -76,7 +76,8 @@ window.addEventListener('resize', () => {
 const messages = [
     "Hey! Do i know you?",
     "Yeah, yeah. I feel like I've seen you before.",
-    "Hmm... Wait... are you a flying skull too?"
+    "Hmm... Wait... are you a flying skull too?",
+    "You let that no-good rascal on the main page know I’m still waitin’ on my three Roman gold pieces!"
   ];
   
   const bubble = document.getElementById("speech-bubble");
