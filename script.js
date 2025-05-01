@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (signupBtn) {
     signupBtn.addEventListener('click', () => {
-      window.location.href = 'signup.html';
+      window.location.href = 'signup2.html';
     });
   }
 });

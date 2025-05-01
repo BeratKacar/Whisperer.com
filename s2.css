@@ -2,7 +2,57 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #121212;
+}
+.t-d-container{
+    flex: 1;
+    background: linear-gradient(135deg, var(#121212) 0%, #0a0a0a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    width: 50wv;
+    height: 100vh;
+    background: transparent;
+    animation: float 3s ease-in-out infinite;
+    overflow: visible; /* Bu önemli */
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+  #t-d{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    width: 100%;
+    height: 600px;
+     /* Modelin orijinal yüksekliği */
+  }
+  #speech-bubble{
+    position: absolute;
+    top: 30%; /* Yukarıya yakın */
+    left: 50%;
+    transform: translate(-50%, -150%); /* -150% ile daha yukarıda */
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+    font-size: 32px;
+  }
 .wrapper {
     --input-focus: #ff6b6b; /* primary */
     --font-color: #ffffff; /* text-primary */
@@ -10,13 +60,14 @@
     --bg-color: rgba(30, 30, 30, 0.8); /* auth-container background */
     --bg-color-alt: #121212; /* dark */
     --main-color: #4ecdc4; /* secondary */
+    flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, var(--bg-color-alt) 0%, #0a0a0a 100%);
+    background:#121212;
     color: var(--font-color);
     font-family: 'Poppins', sans-serif;
     width: 100vw;
@@ -24,9 +75,6 @@
     overflow: hidden;
 }
 
-/* Diğer stiller aynı şekilde kalacak */
-
-/* switch card */
 .switch {
     transform: translateY(-200px);
     position: relative;
@@ -113,7 +161,6 @@
     text-decoration: underline;
 }
 
-/* card */
 .flip-card__inner {
     width: 300px;
     height: 350px;
