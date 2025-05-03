@@ -375,6 +375,21 @@ a h1:hover {
   transform: translate(3px, 3px);
   box-shadow: 0 0 0 var(--main-color);
 }
+footer .link {
+  background-color: #011027;
+  display: flex;
+  justify-content: center;
+  height: 75px;
+  font-size: 25px;
+}
+#link-I , #link-G{
+  transition: transform 0.3s ease;
+  padding: 23px 20px;
+}
+#link-I:hover , #link-G:hover{
+  color: var(--primary);
+  transform: scale(1.1);
+}
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
