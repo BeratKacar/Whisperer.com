@@ -193,9 +193,8 @@ a h1:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   color: var(--font-color);
 }
 
@@ -406,7 +405,9 @@ a h1:hover {
   }
 
   #speech-bubble {
-    font-size: 20px;
+    font-size: 40px;
+    text-align: center;
+    width: 900px;
     top: 15%;
     transform: translate(-50%, -100%);
   }
@@ -447,11 +448,15 @@ a h1:hover {
     padding: 0.5rem 1rem;
     height: auto;
   }
+  .wrapper{
+    height: 0.5vh;
+  }
   #speech-bubble {
-    font-size: 16px;
+    font-size: 28px;
+    width: 600px;
     padding: 8px 12px;
-    top: 10%;
     overflow: hidden;
+    text-align: center;
   }
 
   .flip-card__inner {
