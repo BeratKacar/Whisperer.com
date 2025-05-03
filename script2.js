@@ -187,21 +187,44 @@ document.querySelector('.login-form').addEventListener('submit', function (event
 });
 
 
-const toggleButton = document.getElementById('theme-toggle');
 
-toggleButton.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  if (currentTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    toggleButton.textContent = '🌙 Tema Değiştir';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleButton.textContent = '☀️ Tema Değiştir';
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.getElementById('menuBtn');
+  const dropdown = document.getElementById('dropdown');
+  
+  // Menü butonu tıklama
+  if (menuButton && dropdown) {
+    menuButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+      
+      // Buton animasyonu
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
   }
+
+  // Dışarı tıklayınca kapat
+  document.addEventListener('click', function() {
+    if (dropdown.classList.contains('active')) {
+      dropdown.classList.remove('active');
+    }
+  });
+
+  dropdown?.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+
 });
 
-// Tercih edilen tema tarayıcıdan alınabilir
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  toggleButton.textContent = '☀️ Tema Değiştir';
-}
+document.addEventListener("DOMContentLoaded", function() {
+  const homeBtn = document.getElementById('homeBtn');
+
+  if (homeBtn) {
+    homeBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  }
+});
