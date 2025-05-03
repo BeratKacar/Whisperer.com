@@ -187,32 +187,21 @@ document.querySelector('.login-form').addEventListener('submit', function (event
 });
 
 
-  const checkbox = document.getElementById('themeSwitch');
+const toggleButton = document.getElementById('theme-toggle');
 
-  // Varsayılan olarak dark mode başlat
-  window.addEventListener('DOMContentLoaded', () => {
-    const theme = localStorage.getItem('theme') || 'dark';
-    if (theme === 'dark') {
-      checkbox.checked = true;
-      document.documentElement.classList.add('dark');
-    } else {
-      checkbox.checked = false;
-      document.documentElement.classList.remove('dark');
-    }
-  });
+toggleButton.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    toggleButton.textContent = '🌙 Tema Değiştir';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleButton.textContent = '☀️ Tema Değiştir';
+  }
+});
 
-  // Değişiklik olduğunda kaydet
-  checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
-      localStorage.setItem('theme', 'dark');
-      document.documentElement.classList.add('dark');
-    } else {
-      localStorage.setItem('theme', 'light');
-      document.documentElement.classList.remove('dark');
-    }
-  });
-
-
-
-
-
+// Tercih edilen tema tarayıcıdan alınabilir
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  toggleButton.textContent = '☀️ Tema Değiştir';
+}
