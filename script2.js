@@ -40,7 +40,7 @@ loader.load('4.glb', function(gltf) {
   model.position.set(0, -4, 0);
   model.scale.set(25, 25, 25); 
 
-  camera.position.z = 15;
+  camera.position.z = 13;
 
   let targetRotationX = 0;
 let targetRotationY = 0;
@@ -185,6 +185,34 @@ document.querySelector('.login-form').addEventListener('submit', function (event
     alert('Email veya şifre yanlış!');
   }
 });
+
+
+  const checkbox = document.getElementById('themeSwitch');
+
+  // Varsayılan olarak dark mode başlat
+  window.addEventListener('DOMContentLoaded', () => {
+    const theme = localStorage.getItem('theme') || 'dark';
+    if (theme === 'dark') {
+      checkbox.checked = true;
+      document.documentElement.classList.add('dark');
+    } else {
+      checkbox.checked = false;
+      document.documentElement.classList.remove('dark');
+    }
+  });
+
+  // Değişiklik olduğunda kaydet
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
+    }
+  });
+
+
 
 
 
