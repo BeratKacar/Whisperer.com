@@ -261,15 +261,16 @@ toggleBtn.addEventListener("click", () => {
 const messages = [
   "Tell us human, what are you searching for today?",
   "Yeah yeah. I'm a flying skull, what a miracle! If you're done being surprised, it's time to choose.",
+  "Hey Human! Do you see my cheekbones? I can't find anywhere.",
   "I can hear the wind whispering. It says you want to watch a movie.",
   "Tell me, human, did I.Valentinian kick the bucket? That sickly bastard might’ve even tricked death itself.",
   "I' m 538 years old, but I still don't know what a movie is. Can you tell me?",
   "Hey,hey. Tell me human? What's year is it?",
-  "Dead not deadend. Look at me, ı'm a flying skull!",
-  "Did you read the 'Eyes'. 10/10 would ‘read’ again… if I had eyes. Or a attention span. Or the will to live after Russian literature",
-  "All that whispers. Hey. Let me tell you the meaning of life. The whole points is- (WHATS MOM! I DON'T WANT DİNNER!)"
-
-
+  "Dead not dead end. Look at me, I'm a flying skull!",
+  "Did you read the 'Eyes'. 10/10 would ‘read’ again… if I had eyes. Or a attention span. Or the will to live after Turkish literature",
+  "All that whispers. Hey. Let me tell you the meaning of life. The whole points is- OH NO! I forgot it again!",
+  "Everyone' s here. Dostoyevsky, Tolstoy, Ataturk, M. Jordan, Napolion. Even Hit-. Oh! I think I'd better shut up.",
+  "Yeah yeah. Life is boring. Bla bla. Look at me, human. I'm flaying all day long. Up and down. Up and down."
 ];
 
 const bubble = document.getElementById("speech-bubble");
