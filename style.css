@@ -37,14 +37,16 @@ nav {
   z-index: 1000;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  height: 75px;
 }
 
-.logo {
+.site-logo {
+  margin-top: 20px;
   height: 50px;
   transition: transform 0.3s ease;
 }
 
-.logo:hover {
+.site-logo:hover {
   transform: scale(1.1);
 }
 
