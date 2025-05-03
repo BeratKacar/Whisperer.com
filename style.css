@@ -18,7 +18,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  background: radial-gradient(circle, #1f1f1f, #000000);
   color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
@@ -147,15 +147,15 @@ nav h1 {
   position: absolute;
         top: 35%;
         left: 50%;
-        transform: translate(-50%, -100%);
+        transform: translate(-50%, -110%);
         background: rgba(255, 255, 255, 0.8);
         color: black;
         padding: 10px 15px;
         border-radius: 10px;
         font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 12px rgb(51, 17, 174);
         pointer-events: none;
-        font-size: 32px;
+        font-size: 28px;
 }
 /* Main Content */
 #main-container {
@@ -576,23 +576,46 @@ button:active {
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
+@media (max-width: 1200px) {
+  #speech-bubble {
+    width: 280px;
+  }
+}
 
+@media (max-width: 992px) {
+  #speech-bubble {
+    width: 320px;
+  }
+}
 @media screen and (max-width: 768px) {
   nav{
     flex-direction: row;
     align-items: center;
     padding: 0.5rem 1rem;
-    height: auto;
+    height: 75px;
     position: sticky;
   }
+  #speech-bubble {
+    width: 800px;
+    font-size: 23px;
+    text-align: center;
+  }
+  nav h1{
+    padding-right: 50px;
+  }
 }
-
 @media screen and (max-width: 480px) {
   nav{
     flex-direction: row;
     align-items: center;
     padding: 0.5rem 1rem;
-    justify-content: space-between;
-    height: auto;
+    height: 75px;
+
+  }
+
+  #speech-bubble {
+    text-align: center;
+    width: 95%;
+    font-size: 18px;
   }
 }
