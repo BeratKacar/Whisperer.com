@@ -50,12 +50,16 @@ nav {
   transform: scale(1.1);
 }
 
-nav h1 {
-  font-size: 1.8rem;
+#baslik {
+  font-size: 1.5rem;
   background: linear-gradient(to right, var(--primary), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  transition: transform 0.3s ease;
+}
+#baslik:hover{
+  transform: scale(1.1);
 }
 
 /* MENÜ STİLLERİ */
@@ -576,6 +580,21 @@ button:active {
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
+footer .link {
+  background-color: #011027;
+  display: flex;
+  justify-content: center;
+  height: 75px;
+  font-size: 25px;
+}
+#link-I , #link-G{
+  transition: transform 0.3s ease;
+  padding: 17px 20px;
+}
+#link-I:hover , #link-G:hover{
+  color: var(--primary);
+  transform: scale(1.1);
+}
 @media (max-width: 1200px) {
   #speech-bubble {
     width: 280px;
@@ -602,6 +621,11 @@ button:active {
   }
   nav h1{
     padding-right: 50px;
+  }
+  footer div{
+    font-size: 5px;
+    padding-right:10px;
+    padding-left: 10px;
   }
 }
 @media screen and (max-width: 480px) {
