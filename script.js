@@ -17,6 +17,8 @@ const GENRE_MAP = {
   thriller: 53,
   documentary: 99,
 };
+const shownFilmsMap = {}; 
+
 
 function getSelectedCategories() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -32,7 +34,25 @@ async function fetchFilms(categories) {
       const res = await fetch(`${API_URL}?api_key=${API_KEY}&with_genres=${genreId}&language=tr-TR`);
       if (res.ok) {
         const data = await res.json();
-        allFilms.push(...data.results);
+        const shownIds = shownFilmsMap[cat] || [];
+
+        // Daha önce gösterilmemiş filmleri filtrele
+        const unseenFilms = data.results.filter(film => !shownIds.includes(film.id));
+
+        if (unseenFilms.length === 0) {
+          // Eğer hiç yeni film yoksa, gösterilenleri sıfırla ve tümünü kullan
+          shownFilmsMap[cat] = [];
+          unseenFilms.push(...data.results);
+        }
+
+        // Yeni 4 film seçmek için karıştır ve al
+        const selected = unseenFilms.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+        // Seçilenlerin ID'lerini kaydet
+        if (!shownFilmsMap[cat]) shownFilmsMap[cat] = [];
+        shownFilmsMap[cat].push(...selected.map(f => f.id));
+
+        allFilms.push(...selected);
       }
     }
 
@@ -41,13 +61,13 @@ async function fetchFilms(categories) {
       return;
     }
 
-    const randomFour = allFilms.sort(() => 0.5 - Math.random()).slice(0, 4);
-    displayFilms(randomFour);
+    displayFilms(allFilms);
   } catch (error) {
     console.error("Try again:", error);
     displayError("WTF is happening? I can't hear a whisper. Oh no! Am I deaf? Let's try again human.");
   }
 }
+
 
 function displayFilms(films) {
   filmsContainer.innerHTML = "";
@@ -74,7 +94,6 @@ function displayFilms(films) {
 
 function displayError(message, showInBubble = false) {
   filmsContainer.innerHTML = `<p class="error-message">${message}</p>`;
-  
   if (showInBubble) {
     const bubble = document.getElementById("speech-bubble");
     bubble.textContent = message;
