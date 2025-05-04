@@ -534,12 +534,19 @@ button:active {
     font-size: 1.8rem;
   }
   
-  .speech {
+  #speech-bubble {
     font-size: 1.2rem;
+    width:700px;
   }
 }
 
 @media (max-width: 480px) {
+  #navbar{
+    padding: 0;
+  }
+  .site-logo {
+    display: none;
+  }
   .category-buttons {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -550,6 +557,26 @@ button:active {
   
   .modal-content {
     padding: 1rem;
+  }
+  #speech-bubble {
+    font-size: 1rem;
+    width: 100%;
+  }
+  .social-links-row {
+    gap: 1.5rem; /* Mobilde daha az boşluk */
+  }
+  
+  footer .social-footer a {
+    font-size: 1rem;
+  }
+  
+  footer .social-footer a i {
+    font-size: 1.3rem;
+    margin-right: 5px;
+  }
+  
+  .copyright {
+    font-size: 0.9rem;
   }
 }
 /* Fragman bölümü stilleri */
@@ -689,25 +716,7 @@ footer .social-footer a i {
   font-size: 1rem;
 }
 
-/* MOBİL GÖRÜNÜM */
-@media (max-width: 480px) {
-  .social-links-row {
-    gap: 1.5rem; /* Mobilde daha az boşluk */
-  }
-  
-  footer .social-footer a {
-    font-size: 1rem;
-  }
-  
-  footer .social-footer a i {
-    font-size: 1.3rem;
-    margin-right: 5px;
-  }
-  
-  .copyright {
-    font-size: 0.9rem;
-  }
-}
+
 /* Arama paneli - kapalı halde genişlik 0 */
 .search-panel {
   position: absolute;
