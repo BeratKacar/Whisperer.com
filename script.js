@@ -462,7 +462,7 @@ async function doSearch() {
   filmsContainer.innerHTML = "";  // önceki sonuçları sil
 
   if (!query) {
-    filmsContainer.innerHTML = "<p>Lütfen bir film adı girin.</p>";
+    displayError("Focus human. I am not a mind reader. Please type something.", true);
     return;
   }
 
@@ -474,14 +474,14 @@ async function doSearch() {
     const data = await res.json();
 
     if (!data.results || data.results.length === 0) {
-      filmsContainer.innerHTML = "<p>Sonuç bulunamadı.</p>";
+      displayError("I can't find anything like that.", true);
       return;
     }
 
     displayFilms(data.results);
   } catch (err) {
     console.error(err);
-    filmsContainer.innerHTML = "<p>Bir hata oluştu. Lütfen tekrar deneyin.</p>";
+    displayError("Something wrong. Do it again.", true);
   }
   filmsContainer.scrollIntoView({ behavior: "smooth" });
 }
