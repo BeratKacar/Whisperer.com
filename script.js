@@ -437,3 +437,49 @@ window.addEventListener('resize', () => {
   camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
   camera.updateProjectionMatrix();
 });
+const searchBtn   = document.getElementById("searchBtn");
+const searchPanel = document.getElementById("searchPanel");
+const doSearchBtn = document.getElementById("doSearchBtn");
+const searchInput = document.getElementById("searchInput");
+
+// Paneli aç/kapa ve focus’u input’a ver
+searchBtn.addEventListener("click", () => {
+  searchPanel.classList.toggle("active");
+  if (searchPanel.classList.contains("active")) {
+    searchInput.focus();
+  }
+});
+
+// Enter tuşu ile de aramayı tetikle
+searchInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") doSearch();
+});
+doSearchBtn.addEventListener("click", doSearch);
+
+async function doSearch() {
+  const query = searchInput.value.trim();
+  filmsContainer.innerHTML = "";  // önceki sonuçları sil
+
+  if (!query) {
+    filmsContainer.innerHTML = "<p>Lütfen bir film adı girin.</p>";
+    return;
+  }
+
+  try {
+    const res  = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}` +
+      `&query=${encodeURIComponent(query)}&language=tr-TR`
+    );
+    const data = await res.json();
+
+    if (!data.results || data.results.length === 0) {
+      filmsContainer.innerHTML = "<p>Sonuç bulunamadı.</p>";
+      return;
+    }
+
+    displayFilms(data.results);
+  } catch (err) {
+    console.error(err);
+    filmsContainer.innerHTML = "<p>Bir hata oluştu. Lütfen tekrar deneyin.</p>";
+  }
+}
