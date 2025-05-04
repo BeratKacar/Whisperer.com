@@ -62,13 +62,17 @@ nav {
   transform: scale(1.1);
 }
 #searchBtn{
-  background: none;
+  background: #011027;
   border: none;
   color: var(--text-primary);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+}
+#searchBtn:hover{
+  transform: scale(1.1);
+  color: var(--primary);
 }
 /* Arama Paneli*/
 .search-panel {
@@ -78,7 +82,7 @@ nav {
   right: calc(100% + 0.5rem);
   padding: 0; 
   height: 60px;               
-  background:none;   
+  background:transparent ;   
   overflow: hidden;
   border-radius: 8px;
   box-shadow: none;          
@@ -86,18 +90,13 @@ nav {
   align-items: center;
   gap: 0.5rem;
   max-width: 0;
-  transition: width 0.3s ease, padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-  transform: scale(0.7);
   z-index: 1002;
-}
-.search-panel:hover {
-  transform: none !important;
 }
 
 .search-panel.active {
   max-width: 220px;                                     
   padding: 0.5rem;                                   
-  background: none;                     
+  background: rgba(0, 0, 0, 1);                     
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);          
 }
 
@@ -116,7 +115,7 @@ nav {
 
 /* İçindeki ok-butonu */
 .search-panel button {
-  background: none;
+  background: transparent;
   border: none;
   color: var(--text-primary);
   font-size: 1.1rem;
