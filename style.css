@@ -646,11 +646,11 @@ footer .social-footer a i {
   transform: translateY(-50%);
   right: calc(100% + 0.5rem);
   width: 0;
-  padding: 0;                /* kapalıyken padding sıfır */
-  background: transparent;   /* kapalıyken şeffaf */
+  padding: 0;
+  background: transparent;
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: none;          /* gölge kapalıyken olmasın */
+  box-shadow: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -659,15 +659,12 @@ footer .social-footer a i {
 }
 
 .search-panel.active {
-  width: 220px;                                      /* istediğin genişlik */
-  padding: 0.5rem;                                   /* iç boşluk ekle */
-  background: rgba(0, 0, 0, 1);                      /* tam siyah arka plan */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);          /* gölge geri gelsin */
+  width: 260px; /* Daha geniş alan tanı */
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-
-
-/* İçindeki input */
 .search-panel input {
   flex: 1;
   padding: 0.5rem;
@@ -677,14 +674,15 @@ footer .social-footer a i {
   font-size: 0.9rem;
 }
 
-/* İçindeki ok-butonu */
 .search-panel button {
   background: none;
   border: none;
   color: var(--text-primary);
   font-size: 1.1rem;
   cursor: pointer;
+  margin: 0; /* Margin'leri sıfırla */
 }
+
 .copyright {
   text-align: center;
   margin-top: 10px;
