@@ -78,7 +78,7 @@ nav {
   right: calc(100% + 0.5rem);
   padding: 0; 
   height: 60px;               
-  background: none;   
+  background:none;   
   overflow: hidden;
   border-radius: 8px;
   box-shadow: none;          
@@ -276,14 +276,14 @@ nav {
 
 .category-buttons input[type="checkbox"] {
   position: absolute;
-  opacity: 0;
   width: 1px;
   height: 1px;
-  margin: -1px;
-  border: 0;
   padding: 0;
-  clip: rect(0 0 0 0);
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .category-buttons label {
@@ -313,6 +313,9 @@ nav {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
   border-color: transparent;
+}
+.category-buttons input[type="checkbox"]:focus + label {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
 @keyframes cardAppear {
