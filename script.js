@@ -90,6 +90,7 @@ function displayFilms(films) {
     div.addEventListener("click", () => openFilmModal(film));
     filmsContainer.appendChild(div);
   });
+  filmsContainer.scrollIntoView({ behavior: "smooth" });
 }
 
 function displayError(message, showInBubble = false) {
@@ -482,4 +483,5 @@ async function doSearch() {
     console.error(err);
     filmsContainer.innerHTML = "<p>Bir hata oluştu. Lütfen tekrar deneyin.</p>";
   }
+  filmsContainer.scrollIntoView({ behavior: "smooth" });
 }
