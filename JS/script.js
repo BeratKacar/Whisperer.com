@@ -283,7 +283,7 @@ const messages = [
   "Yeah yeah. I'm a flying skull, what a miracle! If you're done being surprised, it's time to choose.",
   "Hey Human! Do you see my cheekbones? I can't find anywhere.",
   "I can hear the wind whispering. It says you want to watch a movieee.",
-  "Tell me, human, did I.Valentinian kick the bucket? That sickly bastard might’ve even tricked death itself.",
+  "Tell me, human, did I.Firmus kick the bucket? That sickly bastard might’ve even tricked death itself.",
   "I' m 538 years old, but I still don't know what a movie is. Can you tell me?",
   "Hey,hey. Tell me human? What's year is it?",
   "Dead not dead end. Look at me, I'm a flying skull!",
